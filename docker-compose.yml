@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  crypto-whale-viewer:
+    container_name: crypto-whale-viwer
+    ports:
+      - "8080:8080"
+    build: ./
+    network_mode: "host"
