@@ -59,9 +59,21 @@ public class TransactionController {
         return transactionRouteService.getAllDualRouteTypes();
     }
 
-    @GetMapping("transaction/")
-    public List<Transaction> getTransactionByDateAndExchange(@RequestParam String exchange, @RequestParam int daysAgo, @RequestParam boolean onlyStable){
-        return transactionService.getTransactionByDaysAndExchange(exchange, daysAgo, onlyStable);
+    @GetMapping("/transaction/")
+    public List<Transaction> getTransactionByDateAndExchange(@RequestParam String exchange,
+                                                             @RequestParam int daysAgo,
+                                                             @RequestParam(required = false) boolean onlyStable,
+                                                             @RequestParam(required = false) boolean onlyCrypto){
+
+        return transactionService.TransactionForEveryExchanges(exchange, daysAgo, onlyStable, onlyCrypto);
+    }
+
+    @GetMapping("/transaction/exchanges/")
+    public List<Transaction> getTransactionsInAllExchanges(@RequestParam int daysAgo,
+                                                           @RequestParam(required = false) boolean onlyStable,
+                                                           @RequestParam(required = false) boolean onlyCrypto){
+
+        return transactionService.getTransactionForAllExchanges(daysAgo, onlyStable, onlyCrypto);
     }
 
 }
